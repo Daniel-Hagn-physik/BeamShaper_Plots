@@ -1,0 +1,242 @@
+\makeatletter
+\def\input@path{{./apqdesign}}
+\makeatother
+
+\DocumentMetadata{
+	pdfstandard=a-2b,
+	lang=en,
+	pdfversion=1.7,% 2.0 is possible as well, but some validators don't support that yet
+}
+
+%Ab Hier kommen die Einstellungen für das NEUE APQ-TUD_Design!!!
+\documentclass[
+class=book,
+accentcolor=1b,
+custommargins=geometry,
+fontsize=11pt,
+thesis={type=master, reviewer-on-uppertitleback=true}, %options: bachelor, master, proposal, dr and drfinal
+ruledheaders=all,
+headline=false,
+instbox=false,
+marginpar=false,
+title=small,
+ignore-missing-data=true,
+twoside=true, %for bachelor, master, dr, and drfinal: true ; for proposal: false
+pdfx=false, % Disabled anyway when using \DocumentMetadata
+IMRAD = false,
+logofile=apqdesign/tuda_logo.pdf
+]{apqpub}
+
+
+% % % % % % % %
+%Pakete
+\usepackage[main = british]{babel} %main legt die Hauptsprache fest (zb von oder by)
+\usepackage{csquotes}
+\usepackage{cancel}
+% package ulem ändert das Design des Literaturverzeichnisses bei Osa_Mod. Für durchstreichen kann cancel verwendet werden.
+\usepackage{float}
+%\usepackage{subfig}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{multirow}
+\usepackage{isotope}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\ifLuaTeX
+	%no microtyping option for XeTeX
+	\usepackage[%
+	activate={true,nocompatibility},%
+	tracking=true,%
+	factor=1100%
+	]{microtype}
+	\SetTracking{encoding={*}, shape=sc}{40}
+\fi
+\ifPDFTeX
+	\SetTracking{encoding={*}, shape=sc}{40}
+    \usepackage[utf8]{inputenc}
+\fi
+\usepackage{nicefrac}
+\usepackage{upgreek}
+\usepackage[section]{placeins}
+\usepackage{braket}
+\usepackage{chngcntr}
+\usepackage{mathrsfs}
+\usepackage{adjustbox}
+
+\usepackage[abbreviations,automake]{glossaries-extra}
+\makeglossaries
+\input{Content/Glossary}
+
+\counterwithout{figure}{section}
+\usepackage{siunitx}
+\sisetup{
+detect-mode,
+  mode = text,
+  locale = US ,
+  per-mode = fraction,
+%  per-mode = symbol,
+  separate-uncertainty = false,
+}
+\DeclareSIUnit{\decibelmilliwatt}{dBm}
+\usepackage{geometry}
+\geometry{
+    reset,
+    a4paper,
+    top=20mm,
+    bottom=25mm,
+    inner=31mm,%7mm Bindekorrektur sind jetzt
+    outer=24mm,%der neue Standard im APQ-Design!
+    includefoot,
+    includehead,
+    footskip=10mm,
+    nomarginpar
+}
+
+\usepackage[backend=biber, sorting = none, maxnames=99, minbibnames = 2, giveninits=true, doi = false, isbn = false, date = year, url = false, abbreviate = false, bibstyle = numeric-apq, citestyle=numeric-comp]{biblatex}
+\addbibresource{mybib.bib}
+
+\usepackage{hyperref} % Immer als letztes laden
+\def\UrlFont{\normalfont}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=TUDa-1b,citecolor=TUDa-1b}
+\urlstyle{same}
+
+% % % % % % % %
+%Weitere Änderungen
+\DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
+\RedeclareSectionCommand[afterskip=\baselineskip]{chapter}
+\newcommand\todo[1]{\textcolor{red}{#1}}
+\parindent 0pt
+\addtokomafont{caption}{\rmfamily\small}
+\addtokomafont{captionlabel}{\accentfont}
+
+\addTitleBoxLogo*{\makebox[\linewidth][l]{\includegraphics[width=55mm]{graphics/titel_apq-logo.pdf}}}
+
+%Möglichkeit einen generischen Pfad zu Abbildungen anzugeben.
+\graphicspath{{C:/Users/Max_Mustermann/Uni/Master/Masterarbeit/Results/}}
+
+\lowertitleback{
+\captionof{figure}{$3\times3$ grid of multi-tone Top Hat profiles created with an \gls{aod}.}
+\label{fig:Gesamt}
+}
+
+
+
+\begin{document}
+    %\renewcommand*{\figurename}{Abb.}
+    \renewcommand*{\figurename}{Fig.} %Für englische Dokumente auskommentieren
+    \renewcommand*{\tablename}{Tab.}
+    %\titleimage{\includegraphics[width=\textwidth, height=1.198\textwidth]{graphics/title_page.pdf}} %! Watch out! The image/pdf will be scaled to 1:1.198. Only use images with the proper aspect ratio to avoid distorted images.
+    % Titelbild aus BeamShaperPlots (Reiter "Titelbild"). Die Stern-Variante skaliert
+    % das Bild auf das Fenster zwischen den beiden Strichen und beschneidet es mittig
+    % -> kein weisser Rand, auch wenn sich der Titelblock aendert.
+    \titleimage*{\includegraphics{graphics/Titelbild.pdf}}
+    \Metadata{
+       title= Titel der Thesis, %% TUDaThesis -- Template für Abschlussarbeiten im CD der TU Darmstadt,
+      author=Max Mustermann
+    }
+
+    %%%% Für den Titel sind 3 Zeilen vorgesehen.
+    %%%% Hat der Titel nur zwei Zeilen, ist ein Zeillenumbruch (\\) einzufügen, um den Titel oben bündig zu positionieren
+    %%%% Ist der Titel einzeilig sind zwei Freizeilen (\\ \ \\) anzuhängen.
+    %%%% Ludwig Lind 03.02.2021
+    \title{Shaping of uniform intensity profiles for single-site addressing of $^{\textbf{85}}\text{Rb}$ atoms}
+    \subtitle{Strahlformung von homogenen Intensitätsprofilen für die Einzelplatzadressierung von $^{\textbf{85}}\text{Rb}$-Atomen}
+    \author[Daniel Hagn]{Daniel Hagn}%optionales Argument ist die Signatur,
+    %\birthplace{Geburtsort}%Geburtsort, bei Dissertationen zwingend notwendig
+    \reviewer{Prof. Dr. Gerhard Birkl \and Lukas Sturm}%Gutachter
+
+    %Diese Felder erden untereinander auf der Titelseite platziert.
+    %\department ist eine notwendige Angabe, siehe auch dem Abschnitt `Abweichung von den Vorgaben für die Titelseite'
+    %\department{Fachbereich Physik} % Das Kürzel wird automatisch ersetzt und als Studienfach gewählt, siehe Liste der Kürzel im Dokument.
+    %\institute{Institut für angewandte Physik}
+    %\group{Atome-Photonen-Quanten}
+
+    \submissiondate{03.11.2026}
+    \examdate{19.11.2026} %\today
+    \thesisdate{03.11.2026}
+
+    %    \tuprints{urn=1234,printid=12345}
+    %    \dedication{Für alle, die \TeX{} nutzen.}
+
+    \maketitle
+
+    \frontmatter
+
+    %Füge in Abgaben mit twoside=false (z.B. Proposal) trotzdem titleback ein
+    \makeatletter
+    \if@twoside
+    \else%
+    \begingroup
+    \begin{minipage}[t]{\textwidth}
+        \@uppertitleback
+    \end{minipage}\par
+    \vfill
+    \begin{minipage}[b]{\textwidth}
+        \@lowertitleback
+    \end{minipage}\par
+    \@thanks\let\@thanks\@empty
+    \endgroup
+    \clearpage
+    \fi%
+    \makeatother
+
+
+    \tableofcontents
+    \printglossary[
+    type=abbreviations,
+    title=List of Abbreviations,
+    nonumberlist]
+    
+    \mainmatter
+  
+    \setcounter{page}{1}
+    \chapter{Introduction}
+    \label{sec:einleitung}
+    \input{Content/Introduction}
+    
+    \chapter{Theoretical Background}
+    \label{sec:theory}
+    \input{Content/Theory}
+    
+    \chapter{Test Setup with a Beam Shaper}
+    \label{sec:BeamShaperSetup}
+    \input{Content/Test Setup}
+
+    \chapter{Multi-tone Simulation for a Top Hat profile}
+    \label{sec:constant_simulation}
+    \input{Content/Constant_Simulation}
+    
+    \chapter{Simulation of the beating}
+    \label{sec:beating_simulation}
+    \input{Content/Beating}
+    
+    \chapter{New setup}
+    \label{sec:newsetup}
+    \input{Content/NewSetup}
+    
+    \chapter{Conclusion and outlook}
+    \label{sec:fazit}
+    \input{Content/Conclusion}
+
+    \newpage
+    
+    \appendix
+    
+    \chapter*{Appendix}
+    \addcontentsline{toc}{chapter}{Appendix} % Fügt den Anhang zum Inhaltsverzeichnis hinzu
+    \clearpage % Neue Seite vor dem ersten Kapitel im Anhang
+    \input{Content/Appendix}
+
+    \chapter*{Friedhof}
+    \input{Content/Storage}
+    
+    \printbibliography
+	Internet sources were last accessed on November 3, 2026.
+    %\chapter*{Danksagung}
+    %Hier kann man Danke sagen.
+    %Danke an alle.
+    \cleardoublepage
+    \affidavit
+
+\end{document}

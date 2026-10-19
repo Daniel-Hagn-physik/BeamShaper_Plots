@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.idea/
+.venv/
+venv/
+.pytest_cache/
+Auswertung/
+*.bmp
+*.png
+*.tif
+*.tiff
+crash.log

@@ -1,0 +1,6 @@
+numpy>=1.22
+scipy>=1.8
+matplotlib>=3.5   # empfohlen >= 3.7 (schöneres Layout, Schrift-Fallback)
+Pillow>=9.0
+PyQt5>=5.15
+pytest>=7   # nur für die Tests
