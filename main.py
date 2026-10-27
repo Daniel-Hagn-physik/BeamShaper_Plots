@@ -11,6 +11,7 @@ import faulthandler
 import sys
 from pathlib import Path
 
+
 LOG_PATH = Path(__file__).resolve().with_name("crash.log")
 _log = open(LOG_PATH, "a", encoding="utf-8", buffering=1)
 _log.write(f"\n=== Start {datetime.datetime.now():%Y-%m-%d %H:%M:%S}, "
